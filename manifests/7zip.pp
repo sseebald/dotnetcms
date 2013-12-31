@@ -1,4 +1,4 @@
-class profile::7zip {
+class dotnetcms::7zip {
   
   # This class makes use of the staging::file defined type in order to take
   # advantage of a centrally defined file staging directory. Specifically,
@@ -32,7 +32,7 @@ class profile::7zip {
   package { '7-Zip':
     ensure  => installed,
     name    => '7-Zip 9.20 (x64 edition)',
-    source  => 'C:\7z920-x64.msi',
+    source  => 'C:\staging7z920-x64.msi',
     require => File['C:\staging\7z920-x64.msi'],
   }
 
