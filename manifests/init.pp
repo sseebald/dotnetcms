@@ -2,7 +2,8 @@ class dotnetcms {
 
   require dotnetcms::7zip
   include dotnetcms::staging
- 
+  include dotnetcms::iis
+
   file {'C:\staging\dotNetFx40_Full_x86_x64.exe':
     ensure => present,
     mode   => 0755,
