@@ -19,20 +19,16 @@ class dotnetcms::7zip {
   #  include 7zip
   #  include profile::staging
   
-  file {'C:\staging':
-    ensure => directory,
-  }
-
   file {'C:\staging\7z920-x64.msi':
-    ensure  => present,
-    source  => 'puppet:///modules/dotnetcms/7z920-x64.msi',
-    require => File['C:\staging'],
+    ensure => present,
+    mode   => 0755,
+    source => 'puppet:///modules/dotnetcms/7z920-x64.msi',
   }
 
   package { '7-Zip':
     ensure  => installed,
     name    => '7-Zip 9.20 (x64 edition)',
-    source  => 'C:\staging7z920-x64.msi',
+    source  => 'C:\staging\7z920-x64.msi',
     require => File['C:\staging\7z920-x64.msi'],
   }
 

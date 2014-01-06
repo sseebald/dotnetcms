@@ -1,8 +1,7 @@
 class dotnetcms {
 
-  require profile::iis
   require dotnetcms::7zip
-  include profile::staging
+  include dotnetcms::staging
  
   file {'C:\staging\dotNetFx40_Full_x86_x64.exe':
     ensure => present,
