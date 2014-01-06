@@ -4,6 +4,10 @@ class dotnetcms {
   include dotnetcms::staging
   include dotnetcms::iis
 
+  reboot { 'before':
+    when => pending,
+  }
+
   file {'C:\staging\dotNetFx40_Full_x86_x64.exe':
     ensure => present,
     mode   => 0755,
@@ -17,6 +21,10 @@ class dotnetcms {
     install_options => ['/q', '/norestart'],
     before          => Exec['extract_cms4'],
     notify          => Exec['register_net_with_iis'],
+  }
+  
+  reboot { 'after':
+    subscribe => Package['Microsoft .NET Framework 4.5'],
   }
 
   exec { 'register_net_with_iis':
@@ -33,7 +41,6 @@ class dotnetcms {
   exec { 'extract_cms4':
     path        => [$::path, 'C:\Program Files\7-Zip'],
     command     => '7z.exe x C:\staging\CMS4.06.zip -oC:\cms4app',
-    require     => Class['7zip'],
     refreshonly => true,
   }
 
