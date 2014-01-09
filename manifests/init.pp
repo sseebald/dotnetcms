@@ -2,7 +2,7 @@ class dotnetcms {
 
   require dotnetcms::7zip
   include dotnetcms::staging
-  include dotnetcms::iis
+  require dotnetcms::iis
 
   reboot { 'before':
     when => pending,
