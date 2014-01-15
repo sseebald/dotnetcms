@@ -41,7 +41,8 @@ class dotnetcms {
   exec { 'extract_cms4':
     path        => 'C:\Program Files\7-Zip',
     command     => '7z.exe x C:\staging\CMS4.06.zip -oC:\cms4app',
-    require     => File['C:\staging\CMS4.06.zip'],
+    refreshonly => true,
+    subscribe   => File['C:\staging\CMS4.06.zip'],
   }
 
   iis_apppool { 'CMS4':
